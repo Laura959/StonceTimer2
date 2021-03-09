@@ -12,12 +12,9 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
-    private Button button2;
-    private Button button3;
     private Chronometer chronometer;
-    private boolean running;
-    private long pauseOffset;
+    private boolean timeRunning;
+    private long pause;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +29,26 @@ public class MainActivity extends AppCompatActivity {
         chronometer.setBase(SystemClock.elapsedRealtime());
     }
         public void startChronometer(View v){
-            if(!running) {
-                chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            if(!timeRunning) {
+                chronometer.setBase(SystemClock.elapsedRealtime() - pause);
                 chronometer.start();
-                running = true;
+                timeRunning = true;
             }
 
         }
 
         public void pauseChronometer(View v){
-            if(running) {
+            if(timeRunning) {
                 chronometer.stop();
-                pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
-                running = false;
+                pause = SystemClock.elapsedRealtime() - chronometer.getBase();
+                timeRunning = false;
             }
 
         }
 
         public void resetChronometer(View v){
             chronometer.setBase(SystemClock.elapsedRealtime());
-            pauseOffset = 0;
+            pause = 0;
 
         }
 
